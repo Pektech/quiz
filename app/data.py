@@ -47,7 +47,7 @@ data = [
         ]
     },
     {
-        "This Greek mythological figure is the god\goddess of battle strategy (among other things).": [
+        "This Greek mythological figure is the god of battle strategy (among other things).": [
             "Athena",
             "Ares",
             "Artemis",

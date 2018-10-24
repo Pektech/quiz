@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e36401c6cda667286c116c7e071902b15a0fc619c8a4b51650d02d377b1c6be8"
+            "sha256": "7b32fb1f258ec69476b0c757ca1ee8e82a69be3b0c9ad716a17af3848f7022a8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -68,11 +68,15 @@
         },
         "flask": {
             "hashes": [
-                "sha256:2271c0070dbcb5275fad4a82e29f23ab92682dc45f9dfbc22c02ba9b9322ce48",
-                "sha256:a080b744b7e345ccfcbc77954861cb05b3c63786e93f2b3875e0913d44b43f05"
+                "sha256:2ea22336f6d388b4b242bc3abf8a01244a8aa3e236e7407469ef78c16ba355dd",
+                "sha256:6c02dbaa5a9ef790d8219bdced392e2d549c10cd5a5ba4b6aa65126b2271af29"
             ],
             "index": "pypi",
-            "version": "==1.0.2"
+            "version": "==0.12.4"
+        },
+        "flask-ask": {
+            "git": "https://github.com/johnwheeler/flask-ask.git",
+            "ref": "fe407646ae404a8c90b363c86d5c4c201b6a5580"
         },
         "identify": {
             "hashes": [

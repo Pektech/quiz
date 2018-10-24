@@ -6,7 +6,7 @@ name = "pypi"
 [dev-packages]
 
 [packages]
-flask = "~=0.12.1"
+flask = "==0.12.4"
 pre-commit = "*"
 black = "*"
 flask-ask = {git = "https://github.com/johnwheeler/flask-ask.git"}

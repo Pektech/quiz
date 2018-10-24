@@ -8,8 +8,10 @@ name = "pypi"
 [packages]
 flask = "==0.12.4"
 pre-commit = "*"
-black = "*"
+black = "==18.9b0"
 flask-ask = {git = "https://github.com/johnwheeler/flask-ask.git"}
+pytest = "*"
+pytest-flask = "*"
 
 [requires]
 python_version = "3.6"

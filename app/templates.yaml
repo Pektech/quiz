@@ -1,17 +1,21 @@
-welcome: "Welcome to the Mythology Quiz. If your ready to play say 'Start quiz' or say
+welcome: "Welcome to the Mythology Quiz. If your ready to play,  say 'Start quiz' or say
           'Explain' to learn more about this game"
 
-help: "This is a a 10 question quiz built around world mythology. I will ask a question and give
+help: "This is a 10 question quiz built around world mythology. I will ask a question and give
  you four possible answers.  Just shout out the number of the correct answer. At the end I will give
   you a score. Say 'Start Quiz' if you want to start or 'Quit' to end"
 
 game: "{{choose_card}}"
 
-ready: "Okay. The deck is ready. What do you think the next card wil be?"
+correct: "That's correct. okay next {{next_question}}"
 
-score: "Okay game over. {{score}}"
+wrong: "Sorry that's wrong. Lets try another {{ next_question}}"
+
+
+
+score: "Okay game over. You got {{score}} questions correct"
 
 playing: "The game has already started.  Say 'Repeat' to hear the last question or 'Explain' to hear
   the instructions again"
 
-error: "Sorry I do not know that card. Please choose from Star, Cross, Waves, Square or Circle"
+error: "Hmm there are only four questions. Just say the number of the correct answer"

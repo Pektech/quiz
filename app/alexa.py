@@ -31,8 +31,10 @@ def start_game():
         ask_session.attributes["last_speech"] = output
         return question(output)
     else:
-        first_question = ask_question()
-        return first_question
+        next_question = ask_question()
+        ask_session.attributes["GAME_RUNNING"] = 1
+        ask_session.attributes["last_speech"] = next_question
+        return question(next_question).reprompt(next_question)
 
 
 @ask.intent("Ask_Q")
@@ -51,14 +53,14 @@ def ask_question():
 
     index = 0
     for ans_text in round_answers:
-        outtext += str(index + 1) + ". " + ans_text + ". "
+        outtext += str(index + 1) + ". " + ans_text + " . "
         index += 1
         if index == answer_count:
             break
     current_question_index += 1
     ask.session.attributes["CORRECT_ANSWER_INDEX"] = correct_answer_index
     print(correct_answer_index, correct_answer_text)
-    return question(outtext)
+    return outtext
     # print(round_answers, correct_answer_text)
 
     # user_ans = int(input("guess : "))
@@ -69,17 +71,36 @@ def ask_question():
 
 @ask.intent("AnswerQuestion")
 def answer_question(user_answer):
-    correct_answer_index = ask_session.attributes["CORRECT_ANSWER_INDEX"]
-    score = ask_session.attributes["SCORE"]
     user_answer = int(user_answer) - 1
-    if user_answer == correct_answer_index:
-        score += 1
-        print("correct")
-    else:
-        print("wrong")
-    ask_session.attributes["CURRENT_Q_INDEX"] += 1
-    next_question = ask_question()
-    return next_question
+    if user_answer > 3:
+        output = render_template("error")
+        ask_session.attributes["last_speech"] = output
+        return question(output)
+    current_q_index = ask.session.attributes["CURRENT_Q_INDEX"]
+    while current_q_index < 9:
+        correct_answer_index = ask_session.attributes["CORRECT_ANSWER_INDEX"]
+        score = ask_session.attributes["SCORE"]
+        ask_session.attributes["CURRENT_Q_INDEX"] += 1
+
+        next_question = ask_question()
+
+        if user_answer == correct_answer_index:
+            score += 1
+            ask_session.attributes["SCORE"] = score
+            print("correct")
+            ask_session.attributes["last_speech"] = next_question
+            return question("Correct. next " + next_question).reprompt(next_question)
+        else:
+            print("wrong")
+
+            ask_session.attributes["last_speech"] = next_question
+            return question(
+                "Sorry that's wrong. Let's try another " + next_question
+            ).reprompt(next_question)
+    score = ask_session.attributes["SCORE"]
+    output = render_template("score", score=score)
+
+    return statement(output)
 
 
 @ask.intent("AMAZON.FallbackIntent")

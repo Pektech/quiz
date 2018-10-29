@@ -12,6 +12,8 @@ black = "==18.9b0"
 flask-ask = {git = "https://github.com/johnwheeler/flask-ask.git"}
 pytest = "*"
 pytest-flask = "*"
+zappa = "*"
+awscli = "*"
 
 [requires]
 python_version = "3.6"

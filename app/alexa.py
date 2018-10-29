@@ -34,7 +34,7 @@ def start_game():
         next_question = ask_question()
         ask_session.attributes["GAME_RUNNING"] = 1
         ask_session.attributes["last_speech"] = next_question
-        return question(next_question)
+        return question(next_question).reprompt(next_question)
 
 
 @ask.intent("Ask_Q")
@@ -89,12 +89,14 @@ def answer_question(user_answer):
             ask_session.attributes["SCORE"] = score
             print("correct")
             ask_session.attributes["last_speech"] = next_question
-            return question("Correct. next " + next_question)
+            return question("Correct. next " + next_question).reprompt(next_question)
         else:
             print("wrong")
 
             ask_session.attributes["last_speech"] = next_question
-            return question("Sorry that's wrong. Let's try another " + next_question)
+            return question(
+                "Sorry that's wrong. Let's try another " + next_question
+            ).reprompt(next_question)
     score = ask_session.attributes["SCORE"]
     output = render_template("score", score=score)
 

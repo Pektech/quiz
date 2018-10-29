@@ -32,6 +32,8 @@ def start_game():
         return question(output)
     else:
         next_question = ask_question()
+        ask_session.attributes["GAME_RUNNING"] = 1
+        ask_session.attributes["last_speech"] = next_question
         return question(next_question)
 
 
@@ -70,7 +72,6 @@ def ask_question():
 @ask.intent("AnswerQuestion")
 def answer_question(user_answer):
     user_answer = int(user_answer) - 1
-    print(user_answer)
     if user_answer > 3:
         output = render_template("error")
         ask_session.attributes["last_speech"] = output
@@ -80,19 +81,23 @@ def answer_question(user_answer):
         correct_answer_index = ask_session.attributes["CORRECT_ANSWER_INDEX"]
         score = ask_session.attributes["SCORE"]
         ask_session.attributes["CURRENT_Q_INDEX"] += 1
+
         next_question = ask_question()
 
         if user_answer == correct_answer_index:
             score += 1
             ask_session.attributes["SCORE"] = score
             print("correct")
+            ask_session.attributes["last_speech"] = next_question
             return question("Correct. next " + next_question)
         else:
             print("wrong")
-            output = render_template("wrong", next_question=next_question)
-            return question(output)
+
+            ask_session.attributes["last_speech"] = next_question
+            return question("Sorry that's wrong. Let's try another " + next_question)
     score = ask_session.attributes["SCORE"]
     output = render_template("score", score=score)
+
     return statement(output)
 
 
